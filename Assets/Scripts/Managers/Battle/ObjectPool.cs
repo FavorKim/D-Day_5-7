@@ -1,49 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
+public class ObjectPoolManager<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField] GameObject bulletPref;
-    protected static ObjectPool<T> instance;
-    public static ObjectPool<T> Instance { get { return instance; } }
-    private Queue<GameObject> queue;
+    // IObjectPool
+    private IObjectPool<T> objectPool;
 
+    // Prefab
+    [SerializeField] private GameObject prefabObject;
 
-    public void Init(int count)
+    // Parameters of IObjectPool
+    private bool collectionCheck = true;
+    private int defaultCapacity = 10;
+    private int maxSize = 10000;
+
+    private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            queue = new Queue<GameObject>();
-            Spawn(count);
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(instance);
+        objectPool = new ObjectPool<T>(CreateObject, OnGetObject, OnReleaseObject, OnDestroyObject, collectionCheck, defaultCapacity, maxSize);
     }
 
-    public void Spawn(int count)
+    // Create(Instantiate)
+    private T CreateObject()
     {
-        for (int i = 0; i < count; i++)
-        {
-            GameObject obj = Instantiate(bulletPref);
-            obj.transform.SetParent(transform);
-            obj.SetActive(false);
-            Enqueue(obj);
-        }
-    }
-
-    public void Enqueue(GameObject obj)
-    {
-        queue.Enqueue(obj);
-    }
-
-    public GameObject Dequeue()
-    {
-        GameObject obj = queue.Dequeue();
+        T obj = Instantiate(prefabObject).GetComponent<T>();
         return obj;
     }
 
+    // Get(Active)
+    private void OnGetObject(T obj)
+    {
+        obj.gameObject.SetActive(true);
+    }
+
+    // Release(Inactive)
+    private void OnReleaseObject(T obj)
+    {
+        obj.gameObject.SetActive(false);
+    }
+
+    // Destroy
+    private void OnDestroyObject(T obj)
+    {
+        Destroy(obj.gameObject);
+    }
 }

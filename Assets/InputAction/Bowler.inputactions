@@ -1,0 +1,65 @@
+{
+    "name": "Bowler",
+    "maps": [
+        {
+            "name": "Bowler",
+            "id": "9ed0f4ad-2317-4ffc-aa93-632637d8e777",
+            "actions": [
+                {
+                    "name": "Swing",
+                    "type": "Value",
+                    "id": "5b3b248f-4654-4d32-ab88-b3279471d044",
+                    "expectedControlType": "Delta",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "971558c3-551a-405e-b9b3-a21d35064f28",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fe0831c7-8971-4cb6-9c2f-4ddc5c2ee7ad",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c813831d-de2c-4afa-a404-926ef4844b81",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80aad7a5-be3b-4eeb-a929-e4ca23bb10ff",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -9,7 +9,7 @@
                     "name": "Swing",
                     "type": "Value",
                     "id": "5b3b248f-4654-4d32-ab88-b3279471d044",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Delta",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -29,6 +29,17 @@
                     "name": "",
                     "id": "fe0831c7-8971-4cb6-9c2f-4ddc5c2ee7ad",
                     "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c813831d-de2c-4afa-a404-926ef4844b81",
+                    "path": "<Touchscreen>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

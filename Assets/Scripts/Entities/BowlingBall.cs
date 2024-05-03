@@ -1,19 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
+
 
 public class BowlingBall : MonoBehaviour
 {
     Rigidbody rb;
 
-    [SerializeField,Tooltip("R키를 눌렀을 때 볼링공을 되돌릴 위치(Transform)")] Transform startPos;
+    [SerializeField, Tooltip("R키를 눌렀을 때 볼링공을 되돌릴 위치(Transform)")] Transform startPos;
 
     float pow;
     float maxBowlPow = 1.0f;
-    float finalBowlPow = 0.1f;
-    [SerializeField,Tooltip("볼링공 속도 배수")] float bowlPower;
+    float finalPow;
+    [SerializeField, Tooltip("볼링공 속도 계수")] float bowlPower;
+    [SerializeField, Tooltip("백스윙 지속시 파워 감소량")] float powerMinusPerSec;
+    [SerializeField, Tooltip("백스윙시 최대 파워 증가량")] float powerPlusforBackSwing;
+
+
+
+    [SerializeField, Tooltip("백스윙 지속 시간")] float backswingPersistence = 0;
+    [SerializeField, Tooltip("백스윙 지속 시 감속을 시작할 시간")] float timeToStartDecrease;
 
 
     private void Start()
@@ -23,46 +32,88 @@ public class BowlingBall : MonoBehaviour
 
     public void OnSwing(InputValue val)
     {
-        // left = minus, right = plus라고 가정했을 때, 양의 값 만큼 힘의 상한을 증가시키고 음의 값 만큼 힘을 가해 굴리기.
+        // 백스윙 방향산출 고려x 
+        // 던질 때만 방향 산출해서 방향이 달라질 수 있도록.
         pow = val.Get<Vector2>().x;
     }
 
     private void Update()
     {
         Bowl();
+
     }
+
+
 
     void Bowl()
     {
-        
-        
+        /* 문제점
+        // 1. 마우스를 누르고있는 동안 계속 값이 오르기 때문에 볼링공의 파워와 마우스가 움직이는 속도가 관계가 없다
+        // 해결방안
+        // 1. 입력 시간에 제한을 두어서 언제까지고 힘을 늘릴 수 없도록 한다.
+        // 2. 마우스 입력의 최대치만 산출하여 적용한다.
+        // 2-1. 백스윙은 속도가 상관 없으니 현재 파워를 증가시킬 때만 최대치를 산출하여 적용하자.
+        // 2-2. 백스윙을 너무 빠르게 해도 안되니까 일정 수치를 넘어가면 maxPower가 오르지 않도록 하여
+        //   플레이어가 백스윙의 속도를 너무 빠르게 하지 않도록 하는 현실적인 요소를 추가하자
+        // fin. 제한시간이나 정교한 플레이를 요구하는 등의 요소를 통해 플레이어를 묶어두지 말자.
+        // 현실성과 플레이어의 자유로운 플레이 경험을 위해 백스윙을 너무 오래 지속하면 힘이 빠지듯
+        // 점점 최대 파워가 낮아지도록 하여 간접적으로 간섭하자.
+        */
+
         if (Input.GetMouseButton(0))       // 마우스를 누르고 있을 때
         {
-            if (pow < 0)
-                maxBowlPow += pow;         // 마우스의 델타값이 음수(오른쪽)일 때, 파워 최대값 증가
+            if (backswingPersistence > timeToStartDecrease)
+                maxBowlPow -= powerMinusPerSec * Time.deltaTime;
             else if (pow > 0)
-                finalBowlPow += pow;       // 마우스의 델타값이 양수(왼쪽)일 때, 파워 증가
+            {
+                // 마우스의 델타값이 음수(오른쪽)일 때, 파워 최대값 증가
+                maxBowlPow += pow * Time.deltaTime * powerPlusforBackSwing;
+                backswingPersistence += Time.deltaTime;
+            }
 
-            if (finalBowlPow > maxBowlPow) // 파워가 최대치를 넘게될 시, 
-                finalBowlPow = maxBowlPow; // 현재 파워 최대값으로 조정
+            if (pow < 0)
+                SetFinalMax(-pow);         // 마우스의 델타값이 양수(왼쪽)일 때, delta 값을 구하여 최대치를 갱신
+
+
+            if (finalPow > maxBowlPow)     // 파워가 최대치를 넘게될 시, 현재 파워 최대값으로 조정
+                finalPow = maxBowlPow; 
         }
+
         if (Input.GetMouseButtonUp(0))     // 마우스를 뗄 때 (스윙을 끝내고 투척할 때)
         {
-            // 현재 파워 만큼 공의 앞 방향으로 볼링공 투척
-            // (추후 foward를 사용하지 않고 입력한 방향대로 굴러가는 정교한 방향 시스템 도입 계획중)
-            rb.AddForce(Vector3.forward * finalBowlPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
+
+            // 갱신된 최대 파워 만큼 공의 앞 방향으로 볼링공 투척
+            rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
+
 
             // 투척 완료시 최대 파워, 현재 파워 초기화
-            finalBowlPow = 0.1f;
+
+            Debug.Log("Final : " + finalPow);
+            Debug.Log("Max : " + maxBowlPow);
+            finalPow = 0.1f;
             maxBowlPow = 1.0f;
+            backswingPersistence = 0;
         }
     }
+
+
+
+    void SetFinalMax(float pow)
+    {
+        if (pow > finalPow)
+            finalPow = pow;
+    }
+
+
+
+
 
     public void OnReset(InputValue val)
     {
         rb.velocity = Vector3.zero;
-        
+        rb.angularVelocity = Vector3.zero;
         transform.position = startPos.position;
+        transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
 
 

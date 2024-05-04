@@ -92,7 +92,7 @@ public class BowlingBall : MonoBehaviour
             rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
 
             // 마우스 뗐을 때의 위 아래 입력에 따라 볼링공을 회전시킴
-            rb.angularVelocity=new Vector3(rb.angularVelocity.x, rb.angularVelocity.y, dir.x)*Time.deltaTime*spinPower;
+            rb.angularVelocity=new Vector3(-dir.y * spinPower, rb.angularVelocity.y, dir.x * spinPower) *Time.deltaTime;
 
             // 투척 완료시 최대 파워, 현재 파워 초기화
 

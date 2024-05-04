@@ -40,7 +40,7 @@ public class BowlingBall : MonoBehaviour
         // 백스윙 방향산출 고려x 
         // 던질 때만 방향 산출해서 방향이 달라질 수 있도록.
         dir = val.Get<Vector2>();
-        pow = dir.x;
+        pow = dir.y;
         
     }
 
@@ -69,15 +69,15 @@ public class BowlingBall : MonoBehaviour
         {
             if (backswingPersistence > timeToStartDecrease)         // 백스윙을 오래지속했을 경우
                 maxBowlPow -= powerMinusPerSec * Time.deltaTime;    // 최대 파워 감소
-            else if (pow > 0)
+            else if (pow < 0)
             {
                 // 마우스의 델타값이 음수(오른쪽)일 때, 파워 최대값 증가
                 maxBowlPow += Time.deltaTime * powerPlusforBackSwing;
                 backswingPersistence += Time.deltaTime;
             }
 
-            if (pow < 0)
-                SetFinalMax(-pow);         // 마우스의 델타값이 양수(왼쪽)일 때, delta 값을 구하여 최대치를 갱신
+            if (pow > 0)
+                SetFinalMax(pow);         // 마우스의 델타값이 양수(왼쪽)일 때, delta 값을 구하여 최대치를 갱신
 
 
             if (finalPow > maxBowlPow)     // 파워가 최대치를 넘게될 시, 현재 파워 최대값으로 조정
@@ -92,7 +92,7 @@ public class BowlingBall : MonoBehaviour
             rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
 
             // 마우스 뗐을 때의 위 아래 입력에 따라 볼링공을 회전시킴
-            rb.angularVelocity=new Vector3(rb.angularVelocity.x, rb.angularVelocity.y,dir.y)*Time.deltaTime*spinPower;
+            rb.angularVelocity=new Vector3(rb.angularVelocity.x, rb.angularVelocity.y, dir.x)*Time.deltaTime*spinPower;
 
             // 투척 완료시 최대 파워, 현재 파워 초기화
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d78569106e605774283def1ca6d102e6
+guid: 1ff22b87e8889dd498900505097cd7c3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,7 +93,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Score UI_0
+      name: Score Chart UI_0
       rect:
         serializedVersion: 2
         x: 53
@@ -107,14 +107,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35c0a5142810c2e4c9d05d4bb617de41
-      internalID: 1377168162
+      spriteID: f830e219c4f35a24ebca369588e426fb
+      internalID: -1174454447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_1
+      name: Score Chart UI_1
       rect:
         serializedVersion: 2
         x: 100
@@ -128,14 +128,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0d98c07e8516fa4587eb8c94bddbf28
-      internalID: 1513252749
+      spriteID: c1f254dec0458784fb3c0e4f45659269
+      internalID: 1120461319
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_2
+      name: Score Chart UI_2
       rect:
         serializedVersion: 2
         x: 176
@@ -149,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d934bf6f6db56a45add4a8ef5c59a70
-      internalID: 366206332
+      spriteID: fa9f3df4acee8014b845f70aea854adf
+      internalID: -40597080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_3
+      name: Score Chart UI_3
       rect:
         serializedVersion: 2
         x: 246
@@ -170,14 +170,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1276b9cf4b36944409ebd0f73887bccd
-      internalID: 77933266
+      spriteID: 2de02a070671efa468ec5df99b99053c
+      internalID: -1534658739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_4
+      name: Score Chart UI_4
       rect:
         serializedVersion: 2
         x: 320
@@ -191,14 +191,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cbf7c91cbca3fe4ea3a67aa03d2eefe
-      internalID: -766013369
+      spriteID: d658bad31a7cf4c4c94cb85a9ca9152a
+      internalID: -1258516787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_5
+      name: Score Chart UI_5
       rect:
         serializedVersion: 2
         x: 389
@@ -212,14 +212,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 873a71205de3bcd4183ec4dc036a1390
-      internalID: -1702805896
+      spriteID: f1794e0f030da2c489fad7b855b76d64
+      internalID: -1106919290
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_6
+      name: Score Chart UI_6
       rect:
         serializedVersion: 2
         x: 463
@@ -233,14 +233,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca1a38b74d5b8414db8c778a3884efa7
-      internalID: -1763141006
+      spriteID: 678680029bebabd47b6a0a3f6efd7785
+      internalID: 32025946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_7
+      name: Score Chart UI_7
       rect:
         serializedVersion: 2
         x: 530
@@ -254,14 +254,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 587c8e2354c8fb44bb1285fb318f1f45
-      internalID: -505752624
+      spriteID: 94f370c05116d284f9b48cfa9aaa2262
+      internalID: -692999142
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_8
+      name: Score Chart UI_8
       rect:
         serializedVersion: 2
         x: 602
@@ -275,14 +275,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b96da249cf4d554e97ce1827410d91a
-      internalID: -900964778
+      spriteID: 3d4991524356fae4482a2c83b9bcf115
+      internalID: -973175332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_9
+      name: Score Chart UI_9
       rect:
         serializedVersion: 2
         x: 670
@@ -296,14 +296,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2348c0f81a7ccc04e9c42eef905f2999
-      internalID: 1933263604
+      spriteID: 78d45ce76efa21d4280667ffbf5fa994
+      internalID: -97928284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_10
+      name: Score Chart UI_10
       rect:
         serializedVersion: 2
         x: 743
@@ -317,14 +317,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b148861a7e8468b489d1d6569945cd29
-      internalID: -1256865319
+      spriteID: d8cf6b5aaa4092d4dabd17e9a6a3c8eb
+      internalID: -54719768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_11
+      name: Score Chart UI_11
       rect:
         serializedVersion: 2
         x: 757
@@ -338,14 +338,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4693432d36f425c47bc1edf8b3f59a0b
-      internalID: 1788184375
+      spriteID: 94ace8904ef7ee5459f960d87d739053
+      internalID: 775402047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_12
+      name: Score Chart UI_12
       rect:
         serializedVersion: 2
         x: 47
@@ -359,14 +359,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7139dee2e268fb74d892aaa204d9f034
-      internalID: -1163088356
+      spriteID: 87fd0d6179ef507469cb4ccfc96c07a4
+      internalID: 374189389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_13
+      name: Score Chart UI_13
       rect:
         serializedVersion: 2
         x: 94
@@ -380,14 +380,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a78e9ce68ba196640b4047315ec6436c
-      internalID: -1002868241
+      spriteID: fe628fd664f20854b99619c13d7f7d72
+      internalID: 98768033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_14
+      name: Score Chart UI_14
       rect:
         serializedVersion: 2
         x: 170
@@ -401,14 +401,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ebfe6a9492b54b4cb667f8ed8679f32
-      internalID: 862319454
+      spriteID: 77c3320c3df52284494ebb8c089f0653
+      internalID: -1733825156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_15
+      name: Score Chart UI_15
       rect:
         serializedVersion: 2
         x: 240
@@ -422,14 +422,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fafba21c3cc7554f9bbae7310401e87
-      internalID: 1262852095
+      spriteID: 31d4681c3b705994d9856c2b1119fcab
+      internalID: -1830737980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_16
+      name: Score Chart UI_16
       rect:
         serializedVersion: 2
         x: 314
@@ -443,14 +443,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a31c6a400170b14da218fb5edcb0cfa
-      internalID: -332414579
+      spriteID: daf3f94786d759c4f95b8e1125d8f853
+      internalID: -256843432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_17
+      name: Score Chart UI_17
       rect:
         serializedVersion: 2
         x: 383
@@ -464,14 +464,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4983e55225159d540ab3360b01c4f270
-      internalID: -722582666
+      spriteID: 944b732fae5aed3449f99c8573e6470f
+      internalID: 159359532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_18
+      name: Score Chart UI_18
       rect:
         serializedVersion: 2
         x: 457
@@ -485,14 +485,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d35580f1309df04b8c67acbe9be8fcc
-      internalID: -1003469221
+      spriteID: a39d243a6670aba4a8a40f178323a3a6
+      internalID: -42694770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_19
+      name: Score Chart UI_19
       rect:
         serializedVersion: 2
         x: 524
@@ -506,14 +506,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 713be5a5901e7b744a98df425abc34f1
-      internalID: -1850988637
+      spriteID: aa2f3709a8f1c2b469e25f4e4b972b0c
+      internalID: 1898462898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_20
+      name: Score Chart UI_20
       rect:
         serializedVersion: 2
         x: 595
@@ -527,14 +527,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00ea8a57320d3dc499b2175c0240b70d
-      internalID: 348503910
+      spriteID: 0e725e4cb80b3384fb6dc36329cd1995
+      internalID: -1100299774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_21
+      name: Score Chart UI_21
       rect:
         serializedVersion: 2
         x: 664
@@ -548,14 +548,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca29c41c06aa37b4e9cc192759d3f2d0
-      internalID: 779403935
+      spriteID: 7c939782deaa83d4b8b1c263c57a9d35
+      internalID: 1347433517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_22
+      name: Score Chart UI_22
       rect:
         serializedVersion: 2
         x: 737
@@ -569,14 +569,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c27c6fa4695fc9a4082a2a93576be9c1
-      internalID: -1772653105
+      spriteID: 4c5a4c2618fa51d45beb3b651efba617
+      internalID: 1483682325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_23
+      name: Score Chart UI_23
       rect:
         serializedVersion: 2
         x: 751
@@ -590,14 +590,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7840cd65416b9ce44b926b06ad060dd5
-      internalID: -2123543151
+      spriteID: fdff2c38f17381a4290f58a6761ed04e
+      internalID: 1486892817
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_24
+      name: Score Chart UI_24
       rect:
         serializedVersion: 2
         x: 7
@@ -611,14 +611,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 318bea0e07f303447a6899652ecff1ab
-      internalID: 195853998
+      spriteID: 35ad20622ea8c264bb36902a9baeff76
+      internalID: 1848932059
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_25
+      name: Score Chart UI_25
       rect:
         serializedVersion: 2
         x: 146
@@ -632,14 +632,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c568449cc1ce90b42b8c7a6cee5f414c
-      internalID: 1282833332
+      spriteID: 2e49dc80f106b894490a44ffe9f07d0c
+      internalID: -926023761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_26
+      name: Score Chart UI_26
       rect:
         serializedVersion: 2
         x: 327
@@ -653,14 +653,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3608327f74d342e43a7000561a0109f6
-      internalID: -1970906330
+      spriteID: f64627f49d6b04c4c99f96a3759e0699
+      internalID: 1862972929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_27
+      name: Score Chart UI_27
       rect:
         serializedVersion: 2
         x: 466
@@ -674,14 +674,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6af28507ea1e98438bf29268f984120
-      internalID: -1754649705
+      spriteID: 8d2a298c5dfc2ec4391ffff378992287
+      internalID: -1162284779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_28
+      name: Score Chart UI_28
       rect:
         serializedVersion: 2
         x: 0
@@ -695,14 +695,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e81b4c1c6ae0514e83828244a512a62
-      internalID: -107643404
+      spriteID: 850388a4bb4577c4faae96a3e34959fb
+      internalID: -734551530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Score UI_29
+      name: Score Chart UI_29
       rect:
         serializedVersion: 2
         x: 0
@@ -716,8 +716,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a47879f82b2afde47bf992765fa45434
-      internalID: -1479948498
+      spriteID: 77dbde40bd38d0b4ba15f1e35fc14dd0
+      internalID: -1672400886
       vertices: []
       indices: 
       edges: []
@@ -733,36 +733,36 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Score UI_0: 1377168162
-      Score UI_1: 1513252749
-      Score UI_10: -1256865319
-      Score UI_11: 1788184375
-      Score UI_12: -1163088356
-      Score UI_13: -1002868241
-      Score UI_14: 862319454
-      Score UI_15: 1262852095
-      Score UI_16: -332414579
-      Score UI_17: -722582666
-      Score UI_18: -1003469221
-      Score UI_19: -1850988637
-      Score UI_2: 366206332
-      Score UI_20: 348503910
-      Score UI_21: 779403935
-      Score UI_22: -1772653105
-      Score UI_23: -2123543151
-      Score UI_24: 195853998
-      Score UI_25: 1282833332
-      Score UI_26: -1970906330
-      Score UI_27: -1754649705
-      Score UI_28: -107643404
-      Score UI_29: -1479948498
-      Score UI_3: 77933266
-      Score UI_4: -766013369
-      Score UI_5: -1702805896
-      Score UI_6: -1763141006
-      Score UI_7: -505752624
-      Score UI_8: -900964778
-      Score UI_9: 1933263604
+      Score Chart UI_0: -1174454447
+      Score Chart UI_1: 1120461319
+      Score Chart UI_10: -54719768
+      Score Chart UI_11: 775402047
+      Score Chart UI_12: 374189389
+      Score Chart UI_13: 98768033
+      Score Chart UI_14: -1733825156
+      Score Chart UI_15: -1830737980
+      Score Chart UI_16: -256843432
+      Score Chart UI_17: 159359532
+      Score Chart UI_18: -42694770
+      Score Chart UI_19: 1898462898
+      Score Chart UI_2: -40597080
+      Score Chart UI_20: -1100299774
+      Score Chart UI_21: 1347433517
+      Score Chart UI_22: 1483682325
+      Score Chart UI_23: 1486892817
+      Score Chart UI_24: 1848932059
+      Score Chart UI_25: -926023761
+      Score Chart UI_26: 1862972929
+      Score Chart UI_27: -1162284779
+      Score Chart UI_28: -734551530
+      Score Chart UI_29: -1672400886
+      Score Chart UI_3: -1534658739
+      Score Chart UI_4: -1258516787
+      Score Chart UI_5: -1106919290
+      Score Chart UI_6: 32025946
+      Score Chart UI_7: -692999142
+      Score Chart UI_8: -973175332
+      Score Chart UI_9: -97928284
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

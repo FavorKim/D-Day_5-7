@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     protected static GameManager instance;
-    public static GameManager Instance 
+    public static GameManager Instance
     {
-        get 
+        get
         {
             if (instance != null)
             {
@@ -18,15 +18,18 @@ public class GameManager : MonoBehaviour
                     instance = obj;
                 else
                 {
-                   GameObject obj2 = new GameObject("GameManager");
+                    GameObject obj2 = new GameObject("GameManager");
                     obj2.AddComponent<GameManager>();
                     instance = obj2.GetComponent<GameManager>();
                 }
-                    
+
             }
-            return instance; 
+            return instance;
         }
     }
+
+    public int trial = 0;
+    public int floor = 0;
 
     PinsManager pM;
     BowlingBall ball;
@@ -37,25 +40,30 @@ public class GameManager : MonoBehaviour
             instance = this;
         pM = FindObjectOfType<PinsManager>();
         ball = FindObjectOfType<BowlingBall>();
+        totalScore = 0;
     }
 
-
-    //public int PinRemaining { get; set; }
-
-    
-    public void OnFloorSet(InputValue val)
-    {
-        FloorSet();
-    }
 
     public void FloorSet()
     {
+        trial++;
         pM.Spare();
-        Debug.Log("점수 : " + Score);
-
         ball.ResetBall();
+        if (trial > 1)
+        {
+            EndFloor();
+        }
+    }
+
+    public void EndFloor()
+    {
+        totalScore += Score;
+        Debug.Log("총합 점수 : " + totalScore);
         Score = 0;
+        pM.Reset();
+        floor++;
     }
 
     public int Score { get; set; }
+    public int totalScore { get; set; }
 }

@@ -21,12 +21,15 @@ public class PinsManager : MonoBehaviour
 
     public void Reset()
     {
-        for(int i = 0; i< transform.childCount; i++)
+        if (GameManager.Instance.floor > 10)
+            Debug.Log("게임 끝");
+        for (int i = 0; i < transform.childCount; i++)
         {
             pinRb[i].velocity = Vector3.zero;
             pinRb[i].angularVelocity = Vector3.zero;
             pins[i].transform.position = pinPos[i];
-            pins[i].transform.rotation = Quaternion.Euler(-90.0f,0.0f,0.0f);
+            pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+            GameManager.Instance.trial = 0;
         }
     }
 
@@ -34,7 +37,7 @@ public class PinsManager : MonoBehaviour
 
     public void Spare()
     {
-        for(int i=0; i< pins.Count; i++)
+        for (int i = 0; i < pins.Count; i++)
         {
             if (!pins[i].isFall)
             {
@@ -42,7 +45,6 @@ public class PinsManager : MonoBehaviour
                 pinRb[i].angularVelocity = Vector3.zero;
                 pins[i].transform.position = pinPos[i];
                 pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
-                //GameManager.Instance.Score--;
             }
             else
             {
@@ -50,9 +52,35 @@ public class PinsManager : MonoBehaviour
                 pinRb[i].angularVelocity = Vector3.zero;
                 pins[i].transform.position = basketPos.position;
                 pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
-                GameManager.Instance.Score++;
+
             }
         }
+        if (GetScore() == 10)
+        {
+            if (GameManager.Instance.trial == 1)
+            {
+                GameManager.Instance.Score += 10;
+                Debug.Log("스트라이크");
+            }
+            else if (GameManager.Instance.trial == 2)
+            {
+                GameManager.Instance.Score += 5;
+                Debug.Log("스페어");
+            }
+
+            GameManager.Instance.EndFloor();
+        }
+    }
+
+    public int GetScore()
+    {
+        GameManager.Instance.Score = 0;
+        for (int i = 0; i < pins.Count; i++)
+        {
+            if (pins[i].isFall)
+                GameManager.Instance.Score++;
+        }
+        return GameManager.Instance.Score;
     }
 
 }

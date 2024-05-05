@@ -21,11 +21,10 @@ public class BowlingBall : MonoBehaviour
     [SerializeField, Tooltip("백스윙시 최대 파워 증가량")] float powerPlusforBackSwing;
     [SerializeField, Tooltip("볼링공 스핀 계수")] float spinPower;
 
-
-
     [SerializeField, Tooltip("백스윙 지속 시간")] float backswingPersistence = 0;
     [SerializeField, Tooltip("백스윙 지속 시 감속을 시작할 시간")] float timeToStartDecrease;
 
+    bool corStarted = false;
 
     Vector2 dir;
 
@@ -41,7 +40,7 @@ public class BowlingBall : MonoBehaviour
         // 던질 때만 방향 산출해서 방향이 달라질 수 있도록.
         dir = val.Get<Vector2>();
         pow = dir.y;
-        
+
     }
 
     private void Update()
@@ -92,7 +91,7 @@ public class BowlingBall : MonoBehaviour
             rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
 
             // 마우스 뗐을 때의 위 아래 입력에 따라 볼링공을 회전시킴
-            rb.angularVelocity=new Vector3(-dir.y * spinPower, rb.angularVelocity.y, dir.x * spinPower) *Time.deltaTime;
+            rb.angularVelocity = new Vector3(-dir.y * spinPower, rb.angularVelocity.y, dir.x * spinPower) * Time.deltaTime;
 
             // 투척 완료시 최대 파워, 현재 파워 초기화
 
@@ -118,12 +117,36 @@ public class BowlingBall : MonoBehaviour
 
     public void OnReset(InputValue val)
     {
+        ResetBall();
+        pMLeft.Reset();
+    }
+    public void ResetBall()
+    {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         transform.position = startPos.position;
         transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
-        pMLeft.Reset();
     }
 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("EndLine") && !corStarted)
+        {
+            corStarted = true;
+            StartCoroutine(CorEndFloor());
+        }
+    }
+
+    IEnumerator CorEndFloor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5.0f);
+            GameManager.Instance.FloorSet();
+            corStarted = false;
+            StopCoroutine(CorEndFloor());
+            break;
+        }
+    }
 }

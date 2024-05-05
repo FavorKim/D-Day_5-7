@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pin
   - Lane
+  - EndLine
   layers:
   - Default
   - TransparentFX

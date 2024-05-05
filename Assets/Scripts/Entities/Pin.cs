@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Pin : MonoBehaviour
 {
+    public bool isFall = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Lane"))
-            GameManager.Instance.Score++;
+        {
+            isFall = false;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Lane"))
-            GameManager.Instance.Score--;
+        if (other.CompareTag("Lane"))
+        {
+            isFall = true;
+        }
     }
 }

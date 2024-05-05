@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,22 +27,35 @@ public class GameManager : MonoBehaviour
             return instance; 
         }
     }
-    
+
+    PinsManager pM;
+    BowlingBall ball;
+
     void Start()
     {
-        
         if (instance == null)
             instance = this;
+        pM = FindObjectOfType<PinsManager>();
+        ball = FindObjectOfType<BowlingBall>();
     }
 
+
+    //public int PinRemaining { get; set; }
+
+    
+    public void OnFloorSet(InputValue val)
+    {
+        FloorSet();
+    }
+
+    public void FloorSet()
+    {
+        pM.Spare();
+        Debug.Log("Á¡¼ö : " + Score);
+
+        ball.ResetBall();
+        Score = 0;
+    }
 
     public int Score { get; set; }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("¾²·¯Áø ÇÉÀÇ °¹¼ö : "+Score);
-        }
-    }
 }

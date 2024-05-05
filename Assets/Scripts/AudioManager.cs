@@ -51,10 +51,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        BgmPlay();
-    }
     public void BgmPlay() //bgm½ÇÇà
     {
         bgmPlayer.Play();

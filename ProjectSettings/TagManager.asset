@@ -7,6 +7,7 @@ TagManager:
   - BallResetter
   - Ball
   - Pin
+  - DeadZone
   layers:
   - Default
   - TransparentFX

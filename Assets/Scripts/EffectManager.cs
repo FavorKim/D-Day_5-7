@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static EffectManager instance;
+    public GameObject[] prefabs;
+
+    void Awake()
     {
-        
+        instance = this;
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Init()
     {
-        
+        for(int i=0; i<prefabs.Length; i++)
+        {
+            GameObject ob = Instantiate(prefabs[i]);
+            ob.name = "Effect" + i;
+            ob.transform.parent = transform;
+            if(i==0)
+            {
+                ob.transform.localPosition = new Vector3(0.27f, 0f, -0.133f);
+            }
+            else if(i==1)
+            {
+                ob.transform.position = new Vector3(5.201f, 0.164f, -2.397f);
+            }
+        }
+    }
+
+    public void EffectPlay(int index) //0¹ø ÀÎµ¦½º º¼¸µ°ø°ú ÇÉÀÌ ºÎµúÇûÀ»‹š Æø¹ß ÀÌÆåÆ®, 1¹ø ÀÎµ¦½º º¼¸µ°ø À§Ä¡ ÀÌÆåÆ®
+    {
+        GetComponentsInChildren<ParticleSystem>()[index].Play();
+    }
+
+    public void EffetStop(int index)
+    {
+        GetComponentsInChildren<ParticleSystem>()[index].Stop();
     }
 }

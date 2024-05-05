@@ -21,7 +21,7 @@ public class PinsManager : MonoBehaviour
 
     public void Reset()
     {
-        if (GameManager.Instance.floor > 10)
+        if (GameManager.Instance.floor >= GameManager.Instance.MaxRound)
             Debug.Log("∞‘¿” ≥°");
         for (int i = 0; i < transform.childCount; i++)
         {

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public int trial = 0;
     public int floor = 0;
+    public int MaxRound;
 
     PinsManager pM;
     BowlingBall ball;
@@ -60,8 +61,8 @@ public class GameManager : MonoBehaviour
         totalScore += Score;
         Debug.Log("ÃÑÇÕ Á¡¼ö : " + totalScore);
         Score = 0;
-        pM.Reset();
         floor++;
+        pM.Reset();
     }
 
     public int Score { get; set; }

@@ -9,7 +9,6 @@ public class BallEffect : MonoBehaviour
         if (collision.collider.CompareTag("Pin"))
         {
             EffectManager.instance.EffectPlay(0);
-            AudioManager.Instance.SfxPlay(AudioManager.Sfx.pin_hit);
         }
     }
 }

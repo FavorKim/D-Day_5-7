@@ -2,57 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class BgmSound
+{
+    public AudioClip clip;
+}
+
+[System.Serializable]
+public class SfxSound
+{
+    public AudioClip clip;
+}
+
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    private static AudioManager instance;
+    public static AudioManager Instance
+    {
+        get;
+        private set;
+    }
 
-    [Header("#BGM")] //배경음
-    public AudioClip bgmClip;
-    public float bgmVolume;
-    AudioSource bgmPlayer;
+    [Header("배경음")]
+    [SerializeField] BgmSound[] bgmsounds;
 
-    [Header("#SFX")] //효과음
-    public AudioClip[] sfxClips;
-    public float sfxVolume;
-    public int channels;
-    AudioSource[] sfxPlayers;
-    int channelIndex;
+    [Header("브금 플레이어")]
+    [SerializeField] AudioSource bgmPlayer;
 
-    public enum Sfx {ball_hit,ball_roll,gutter,SpareCongrats,strike1,StrikeCongrats};
-    //볼 바닥 떨어질떄,볼 굴러갈떄,볼이 거터에 빠졌을떄, 스페어 처리 축하,볼이 핀 쳤을떄,스트라이크 축하
+    [Header("효과음")]
+    [SerializeField] SfxSound[] sfxSounds;
+
+    [Header("효과음 플레이어")]
+    [SerializeField] AudioSource SfxPlayer;
+
+    
+    public enum Sfx { pin_hit, ball_roll,gutter};
+    //공이 핀을 쳤을떄, 볼 굴러가는 중,거터에 빠졌을떄
 
     void Awake()
     {
-        instance = this;
-        Init();
+       if(Instance!=null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    void Init() //초기화
+    private void Update()
     {
-        //배경음
-        GameObject bgmObject = new GameObject("BgmPlayer");
-        bgmObject.transform.parent = transform;
-        bgmPlayer = bgmObject.AddComponent<AudioSource>();
-        bgmPlayer.playOnAwake = false;
-        bgmPlayer.loop = true;
-        bgmPlayer.volume = bgmVolume;
-        bgmPlayer.clip = bgmClip;
-
-        //효과음
-        GameObject sfxObject = new GameObject("SfxPlayer");
-        sfxObject.transform.parent = transform;
-        sfxPlayers = new AudioSource[channels];
-
-        for (int index = 0; index < sfxPlayers.Length; index++)
+        if(!bgmPlayer.isPlaying) 
         {
-            sfxPlayers[index] = sfxObject.AddComponent<AudioSource>();
-            sfxPlayers[index].playOnAwake = false;
-            sfxPlayers[index].volume = sfxVolume;
+            BgmPlay();
         }
     }
 
     public void BgmPlay() //bgm실행
     {
+        int random = Random.Range(0, 9);
+        bgmPlayer.clip = bgmsounds[random].clip;
         bgmPlayer.Play();
     }
 
@@ -63,23 +72,8 @@ public class AudioManager : MonoBehaviour
 
     public void SfxPlay(Sfx sfx) //효과음 실행(매개변수 enum 사용)
     {
-        for(int index=0; index<sfxPlayers.Length; index++)
-        {
-            int loopIndex = (index + channelIndex) % sfxPlayers.Length;
-
-            if (sfxPlayers[loopIndex].isPlaying)
-            {
-                continue;
-            }
-
-           
-            channelIndex = loopIndex;
-            sfxPlayers[0].clip = sfxClips[(int)sfx];
-            sfxPlayers[0].Play();
-            break;
-        }
-
-        
+        SfxPlayer.clip = sfxSounds[(int)sfx].clip;
+        SfxPlayer.Play();
     }
 }
 

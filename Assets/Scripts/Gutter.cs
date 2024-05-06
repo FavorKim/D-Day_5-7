@@ -9,7 +9,7 @@ public class Gutter : MonoBehaviour
     {
         if (collision.collider.CompareTag("Ball"))
         {
-            AudioManager.instance.SfxPlay(AudioManager.Sfx.gutter);
+            AudioManager.Instance.SfxPlay(AudioManager.Sfx.gutter);
         }
     }
 }

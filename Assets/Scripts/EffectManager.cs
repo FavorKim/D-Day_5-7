@@ -31,12 +31,12 @@ public class EffectManager : MonoBehaviour
         }
     }
 
-    public void EffectPlay(int index) //0번 인덱스 볼링공과 핀이 부딪혔을떄 폭발 이펙트, 1번 인덱스 볼링공 위치 이펙트
+    public void EffectPlay(int index) //0번 인덱스 볼링공과 핀이 부딪혔을떄 폭발 이펙트, 1번 인덱스 볼링공스폰 위치 이펙트
     {
         GetComponentsInChildren<ParticleSystem>()[index].Play();
     }
 
-    public void EffetStop(int index)
+    public void EffetStop(int index) 
     {
         GetComponentsInChildren<ParticleSystem>()[index].Stop();
     }

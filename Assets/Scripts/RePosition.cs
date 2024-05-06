@@ -11,7 +11,6 @@ public class RePosition : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(5.11f, 0.144f, -2.51f);
             EffectManager.instance.EffectPlay(1);
-            AudioManager.instance.SfxPlay(AudioManager.Sfx.strike1);
         }
         else if(collision.collider.CompareTag("Pin"))
         {

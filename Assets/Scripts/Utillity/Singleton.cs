@@ -10,20 +10,20 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         get
         {
 
-            // ÀÎ½ºÅÏ½º°¡ nullÀÌ¸é
+            // ì¸ìŠ¤í„´ìŠ¤ê°€ nullì´ë©´
             if (instance == null)
             {
-                // ¾À¿¡ ÀÌ¹Ì ÇØ´ç Å¸ÀÔÀÇ ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÏ´ÂÁö Ã£¾Æ¼­ °¡Á®¿À°í
+                // ì”¬ì— ì´ë¯¸ í•´ë‹¹ íƒ€ì…ì˜ ì¸ìŠ¤í„´ìŠ¤ê°€ ì¡´ì¬í•˜ëŠ”ì§€ ì°¾ì•„ì„œ ê°€ì ¸ì˜¤ê³ 
                 instance = (T)FindObjectOfType(typeof(T));
 
-                // Ã£¾Æµµ ¾øÀ¸¸é
+                // ì°¾ì•„ë„ ì—†ìœ¼ë©´
                 if (instance == null)
                 {
-                    // »õ·Î »ı¼º
+                    // ìƒˆë¡œ ìƒì„±
                     GameObject singtonObj = new GameObject();
                     instance = singtonObj.AddComponent<T>();
 
-                    // SceneÀÌ º¯°æµÇµµ ÆÄ±«µÇÁö ¾Êµµ·Ï ¼³Á¤
+                    // Sceneì´ ë³€ê²½ë˜ë„ íŒŒê´´ë˜ì§€ ì•Šë„ë¡ ì„¤ì •
                     DontDestroyOnLoad(singtonObj);
                 }
 

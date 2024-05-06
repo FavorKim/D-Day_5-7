@@ -10,6 +10,9 @@ public class BowlingBall : MonoBehaviour
 
     private Rigidbody rb;
 
+    // 캐릭터 애니메이션
+    [SerializeField] private Animator anim;
+
     [SerializeField] private PinsManager pMLeft;
     [SerializeField] private Transform centerOfLane; // 레인의 중간 지점
     [SerializeField, Tooltip("R키를 눌렀을 때 볼링공을 되돌릴 위치(Transform)")] private Transform startPos; // 시작 지점
@@ -58,6 +61,23 @@ public class BowlingBall : MonoBehaviour
     public void OnMove(InputValue val)
     {
         moveDir = val.Get<Vector2>().normalized;
+
+        // 양 옆으로 이동 시 캐릭터의 걷기 애니메이션 재생
+        if (moveDir.x == 0)
+        {
+            anim.SetBool("StrafeLeft", false);
+            anim.SetBool("StrafeRight", false);
+        }
+        else if (moveDir.x < 0)
+        {
+            anim.SetBool("StrafeLeft", true);
+            anim.gameObject.transform.Translate(moveDir* moveSpeed * Time.deltaTime);
+        }
+        else if (moveDir.x > 0)
+        {
+            anim.SetBool("StrafeRight", true);
+            anim.gameObject.transform.Translate(moveDir * moveSpeed * Time.deltaTime);
+        }
     }
 
     void Move()
@@ -130,6 +150,9 @@ public class BowlingBall : MonoBehaviour
             finalPow = 0.0f;
             maxBowlPow = 1.0f;
             backswingPersistence = 0;
+
+            // 캐릭터 애니메이션
+            anim.SetTrigger("ThrowBall");
         }
     }
 

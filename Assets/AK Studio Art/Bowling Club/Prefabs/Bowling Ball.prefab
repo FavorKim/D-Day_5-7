@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 448415985639910009}
   - component: {fileID: -3670986006434207755}
   - component: {fileID: -561781321198709864}
+  - component: {fileID: 1963480980752181225}
+  - component: {fileID: 9194530283541203651}
   m_Layer: 0
   m_Name: Bowling Ball
   m_TagString: Ball
@@ -33,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2440353685754912435
 MeshFilter:
@@ -93,9 +95,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105973264634596268}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.1187696
   m_Center: {x: 0.0000006072223, y: 0.00052902475, z: 0.0000006109476}
 --- !u!54 &-561781321198709864
@@ -105,12 +115,74 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105973264634596268}
-  serializedVersion: 2
-  m_Mass: 7.2
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  serializedVersion: 4
+  m_Mass: 50
+  m_Drag: 0.01
+  m_AngularDrag: 0.001
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &1963480980752181225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105973264634596268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27059a99a3908624ea1178ea493089af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pMLeft: {fileID: 0}
+  centerOfLane: {fileID: 0}
+  startPos: {fileID: 0}
+  bowlPower: 500
+  powerMinusPerSec: 15
+  powerPlusforBackSwing: 150
+  spinPower: 10
+  backswingPersistence: 0
+  timeToStartDecrease: 1
+--- !u!114 &9194530283541203651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105973264634596268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 466922fb91b17124387817a394d1d094, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Bowler
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

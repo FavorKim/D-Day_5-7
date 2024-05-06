@@ -28,6 +28,7 @@ public class BowlingBall : MonoBehaviour
     [SerializeField, Tooltip("백스윙 지속 시 감속을 시작할 시간")] private float timeToStartDecrease;
 
     private bool corStarted = false;
+    private bool isRolling = false;
 
     private Vector2 dir;
 
@@ -38,8 +39,6 @@ public class BowlingBall : MonoBehaviour
 
     public void OnSwing(InputValue val)
     {
-        // 백스윙 방향 산출 고려 X 
-        // 던질 때만 방향 산출해서 방향이 달라질 수 있도록.
         dir = val.Get<Vector2>();
         pow = dir.y;
     }
@@ -51,18 +50,6 @@ public class BowlingBall : MonoBehaviour
 
     void Bowl()
     {
-        /* 문제점
-        // 1. 마우스를 누르고있는 동안 계속 값이 오르기 때문에 볼링공의 파워와 마우스가 움직이는 속도가 관계가 없다
-        // 해결방안
-        // 1. 입력 시간에 제한을 두어서 언제까지고 힘을 늘릴 수 없도록 한다.
-        // 2. 마우스 입력의 최대치만 산출하여 적용한다.
-        // 2-1. 백스윙은 속도가 상관 없으니 현재 파워를 증가시킬 때만 최대치를 산출하여 적용하자.
-        // 2-2. 백스윙을 너무 빠르게 해도 안되니까 일정 수치를 넘어가면 maxPower가 오르지 않도록 하여
-        //   플레이어가 백스윙의 속도를 너무 빠르게 하지 않도록 하는 현실적인 요소를 추가하자
-        // fin. 제한시간이나 정교한 플레이를 요구하는 등의 요소를 통해 플레이어를 묶어두지 말자.
-        // 현실성과 플레이어의 자유로운 플레이 경험을 위해 백스윙을 너무 오래 지속하면 힘이 빠지듯
-        // 점점 최대 파워가 낮아지도록 하여 간접적으로 간섭하자.
-        */
 
         /*
          * ※ 수정 사항
@@ -92,9 +79,9 @@ public class BowlingBall : MonoBehaviour
                 finalPow = maxBowlPow;
         }
 
-        if (Input.GetMouseButtonUp(0))     // 마우스를 뗄 때 (스윙을 끝내고 투척할 때)
+        if (Input.GetMouseButtonUp(0)&&!isRolling)     // 마우스를 뗄 때 (스윙을 끝내고 투척할 때)
         {
-            //Vector3 bowlDir = new Vector3(-dir.y, 0.0f, -dir.x).normalized;
+            
 
             // 갱신된 최대 파워 만큼 공의 앞 방향으로 볼링공 투척
             rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
@@ -109,6 +96,7 @@ public class BowlingBall : MonoBehaviour
             finalPow = 0.1f;
             maxBowlPow = 1.0f;
             backswingPersistence = 0;
+            isRolling = true;
         }
     }
 
@@ -151,8 +139,9 @@ public class BowlingBall : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(3.0f);
             GameManager.Instance.FloorSet();
+            isRolling = false;
             corStarted = false;
             StopCoroutine(CorEndFloor());
             break;

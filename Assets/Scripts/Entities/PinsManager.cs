@@ -9,7 +9,7 @@ public class PinsManager : MonoBehaviour
      */
 
     List<Rigidbody> pinRb = new List<Rigidbody>();
-    List<Pin> pins = new List<Pin>();
+    [SerializeField]List<Pin> pins = new List<Pin>();
     List<Vector3> pinPos = new List<Vector3>();
     [SerializeField] Transform basketPos;
 
@@ -32,7 +32,7 @@ public class PinsManager : MonoBehaviour
             pinRb[i].velocity = Vector3.zero;
             pinRb[i].angularVelocity = Vector3.zero;
             pins[i].transform.position = pinPos[i];
-            pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+            pins[i].transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             GameManager.Instance.SetTrial(0);
         }
     }
@@ -48,14 +48,14 @@ public class PinsManager : MonoBehaviour
                 pinRb[i].velocity = Vector3.zero;
                 pinRb[i].angularVelocity = Vector3.zero;
                 pins[i].transform.position = pinPos[i];
-                pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+                pins[i].transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
-            else
+            else if (pins[i].isFall)
             {
                 pinRb[i].velocity = Vector3.zero;
                 pinRb[i].angularVelocity = Vector3.zero;
                 pins[i].transform.position = basketPos.position;
-                pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
+                pins[i].transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 
             }
         }
@@ -82,7 +82,10 @@ public class PinsManager : MonoBehaviour
         for (int i = 0; i < pins.Count; i++)
         {
             if (pins[i].isFall)
+            {
                 GameManager.Instance.Score++;
+            }
+
         }
         return GameManager.Instance.Score;
     }

@@ -2,29 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SettingUI : MonoBehaviour
 {
-
-    public Slider bgmSlider;
-    public Slider sfxSlider;
-
-    private void Start()
+    public void RestartGame()
     {
-        // ¹è°æÀ½ º¼·ı ÃÊ±âÈ­
-        bgmSlider.value = AudioManager1.instance.GetBgmVolume();
-        // È¿°úÀ½ º¼·ı ÃÊ±âÈ­
-        sfxSlider.value = AudioManager1.instance.GetSfxVolume();
+        {
+            //Scenceì´ë™ìœ¼ë¡œ ê²Œì„ ì¬ì‹œì‘
+            SceneManager.LoadScene("Game Scene");
+        }
     }
-
-    public void SetBgmVolume(float volume)
-    {
-        AudioManager1.instance.SetBgmVolume(volume);
-    }
-
-    public void SetSfxVolume(float volume)
-    {
-        AudioManager1.instance.SetSfxVolume(volume);
-    }
-
 }
+
+
+
+

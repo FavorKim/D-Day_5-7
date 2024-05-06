@@ -281,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66043659}
   m_LocalRotation: {x: 0.007762127, y: 0.9929145, z: -0.11857734, w: 0.0002133176}
-  m_LocalPosition: {x: 5.1, y: 0.97999996, z: 0}
+  m_LocalPosition: {x: 5.175, y: 0.97999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -585,7 +585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1617420268353065238, guid: 31cda086df3e9e748b422463e89dbe59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.1
+      value: 5.175
       objectReference: {fileID: 0}
     - target: {fileID: 1617420268353065238, guid: 31cda086df3e9e748b422463e89dbe59, type: 3}
       propertyPath: m_LocalPosition.y
@@ -631,6 +631,10 @@ PrefabInstance:
       propertyPath: startPos
       value: 
       objectReference: {fileID: 2059829227}
+    - target: {fileID: 1963480980752181225, guid: 31cda086df3e9e748b422463e89dbe59, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1963480980752181225, guid: 31cda086df3e9e748b422463e89dbe59, type: 3}
       propertyPath: centerOfLane
       value: 
@@ -4490,6 +4494,7 @@ MonoBehaviour:
   pMLeft: {fileID: 0}
   centerOfLane: {fileID: 0}
   startPos: {fileID: 0}
+  moveSpeed: 0
   bowlPower: 300000
   powerMinusPerSec: 15
   powerPlusforBackSwing: 150
@@ -5898,7 +5903,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274902284}
   m_LocalRotation: {x: 0.007762127, y: 0.9929145, z: -0.11857734, w: 0.0002133176}
-  m_LocalPosition: {x: 5.1, y: 0.97999996, z: 0}
+  m_LocalPosition: {x: 5.175, y: 0.97999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

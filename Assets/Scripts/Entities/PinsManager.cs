@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PinsManager : MonoBehaviour
 {
+    /*
+     * 새로운 에셋으로 변경함에 따라 값이 적절하게 적용되지 않는 듯하며, 그 부분에 대해 다소 수정할 필요가 있어 보입니다.
+     */
+
     List<Rigidbody> pinRb = new List<Rigidbody>();
     List<Pin> pins = new List<Pin>();
     List<Vector3> pinPos = new List<Vector3>();
@@ -21,15 +25,15 @@ public class PinsManager : MonoBehaviour
 
     public void Reset()
     {
-        if (GameManager.Instance.floor >= GameManager.Instance.MaxRound)
-            Debug.Log("���� ��");
+        if (GameManager.Instance.GetFloor() >= GameManager.Instance.GetMaxRound())
+            Debug.Log("게임 끝");
         for (int i = 0; i < transform.childCount; i++)
         {
             pinRb[i].velocity = Vector3.zero;
             pinRb[i].angularVelocity = Vector3.zero;
             pins[i].transform.position = pinPos[i];
             pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
-            GameManager.Instance.trial = 0;
+            GameManager.Instance.SetTrial(0);
         }
     }
 
@@ -57,15 +61,15 @@ public class PinsManager : MonoBehaviour
         }
         if (GetScore() == 10)
         {
-            if (GameManager.Instance.trial == 1)
+            if (GameManager.Instance.GetTrial() == 1)
             {
                 GameManager.Instance.Score += 10;
-                Debug.Log("��Ʈ����ũ");
+                Debug.Log("스트라이크");
             }
-            else if (GameManager.Instance.trial == 2)
+            else if (GameManager.Instance.GetTrial() == 2)
             {
                 GameManager.Instance.Score += 5;
-                Debug.Log("�����");
+                Debug.Log("스페어");
             }
 
             GameManager.Instance.EndFloor();

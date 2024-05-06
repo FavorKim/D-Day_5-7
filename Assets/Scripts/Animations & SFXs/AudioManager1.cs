@@ -116,4 +116,32 @@ public class AudioManager1 : MonoBehaviour
             break;
         }
     }
+
+    // 배경음 볼륨을 가져오는 메서드
+    public float GetBgmVolume()
+    {
+        return bgmPlayer.volume;
+    }
+
+    // 배경음 볼륨을 설정하는 메서드
+    public void SetBgmVolume(float volume)
+    {
+        bgmPlayer.volume = volume;
+    }
+
+    // 효과음 볼륨을 가져오는 메서드
+    public float GetSfxVolume()
+    {
+        return sfxVolume;
+    }
+
+    // 효과음 볼륨을 설정하는 메서드
+    public void SetSfxVolume(float volume)
+    {
+        sfxVolume = volume;
+        foreach (var player in sfxPlayers)
+        {
+            player.volume = volume;
+        }
+    }
 }

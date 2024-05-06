@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GamePlayUI : MonoBehaviour
 {
-    public void OnClickReStart()
+    public void RestartGame()
     {
-        //ScenceÀÌµ¿À¸·Î °ÔÀÓ Àç½ÃÀÛ
-        SceneManager.LoadScene("UI");
+        {
+            //Scenceì´ë™ìœ¼ë¡œ ê²Œì„ ì¬ì‹œì‘
+            SceneManager.LoadScene("Game Scene");
+        }
     }
 }
+
+
+
+
+

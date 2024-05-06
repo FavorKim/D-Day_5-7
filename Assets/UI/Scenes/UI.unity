@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4024,7 +4024,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 526046336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d93e2ae138d3285418f9ac4ae4f3659c, type: 3}
+  m_Script: {fileID: 11500000, guid: e86a8f8bc1d35dc47921d779c87d1bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &533253118
@@ -4354,7 +4354,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 526046341}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GamePlayUI, Assembly-CSharp
         m_MethodName: OnClickReStart
         m_Mode: 1
@@ -12061,6 +12061,7 @@ GameObject:
   - component: {fileID: 1313028451}
   - component: {fileID: 1313028450}
   - component: {fileID: 1313028449}
+  - component: {fileID: 1313028452}
   m_Layer: 5
   m_Name: SetUI
   m_TagString: Untagged
@@ -12151,6 +12152,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1313028452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313028447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c305720bdadfad498a08629901d098d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 639102378}
+  sfxSlider: {fileID: 1078595183}
 --- !u!1 &1314491731
 GameObject:
   m_ObjectHideFlags: 0
@@ -16996,7 +17011,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1972220058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f9273617b9e33f4cb132ed256fd333d, type: 3}
+  m_Script: {fileID: 11500000, guid: fd68f16edfeec614bb93bbd8fadb10f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1995914157

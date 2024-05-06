@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+
 [System.Serializable] 
 public class BgmSound //bgm사운드
 {
@@ -16,6 +19,7 @@ public class SfxSound //효과음 사운드
 
 public class AudioManager : MonoBehaviour
 {
+
     private static AudioManager instance;
     public static AudioManager Instance //프로퍼티
     {

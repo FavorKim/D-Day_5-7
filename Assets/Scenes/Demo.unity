@@ -743,7 +743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a48dc9d93e98494b9c519333fb89070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
 --- !u!4 &353856742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5073774224692920764, guid: f7446551bcb8ff04996f28e38e550cb0, type: 3}
@@ -5946,7 +5945,8 @@ PrefabInstance:
       propertyPath: prefab.Array.data[9]
       value: 
       objectReference: {fileID: 364660657}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5217268039032286773, guid: a6f9bdd62d99a744ab9bbc8b3ff8f40b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6f9bdd62d99a744ab9bbc8b3ff8f40b, type: 3}
 --- !u!1001 &2101895605
 PrefabInstance:

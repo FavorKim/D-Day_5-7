@@ -24,16 +24,11 @@ public class EffectManager : MonoBehaviour
             {
                 ob.transform.localPosition = new Vector3(0.27f, 0f, -0.133f);
             }
-            else if (i == 1)
-            {
-                ob.transform.position = new Vector3(5.201f, 0.164f, -2.397f);
-            }
         }
     }
 
     public void EffectPlay(int index) 
     {
-
         GetComponentsInChildren<ParticleSystem>()[index].Play();
     }
 

@@ -18,6 +18,10 @@ public class PinEffect : MonoBehaviour
             audio.Play();
             EffectManager.instance.EffectPlay(0);
         }
+        if(collision.collider.CompareTag("DeadZone"))
+        {
+            gameObject.SetActive(false);
+        }
 
     }
 

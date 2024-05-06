@@ -17542,6 +17542,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8029036822818023838, guid: dd4931663b3ced445b5e8c83a2d8c6ee, type: 3}
+      propertyPath: m_TagString
+      value: DeadZone
+      objectReference: {fileID: 0}
     - target: {fileID: 8091634004187716546, guid: dd4931663b3ced445b5e8c83a2d8c6ee, type: 3}
       propertyPath: m_Layer
       value: 6

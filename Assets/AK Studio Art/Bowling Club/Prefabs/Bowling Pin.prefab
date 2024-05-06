@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7742992640602921606}
   - component: {fileID: 7742992640602921607}
   - component: {fileID: 4648101614083784426}
+  - component: {fileID: 3171074318317950891}
   - component: {fileID: 54351337812265380}
   m_Layer: 0
   m_Name: Bowling Pin
@@ -130,6 +131,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34095245590d2b149a67ae26f3cc7d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3171074318317950891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353975502381453305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903239492223a2c4eaec013fac0d9ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFall: 0
 --- !u!82 &54351337812265380
 AudioSource:
   m_ObjectHideFlags: 0

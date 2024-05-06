@@ -11,14 +11,11 @@ public class Gutter : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
-    void OnCollisionStay(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("Ball"))
         {
-            if(!audio.isPlaying)
-            {
-                audio.Play();
-            }
+            audio.Play();
         }
     }
 }

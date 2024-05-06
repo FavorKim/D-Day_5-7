@@ -27,6 +27,13 @@ public class PinsManager : MonoBehaviour
     {
         if (GameManager.Instance.GetFloor() >= GameManager.Instance.GetMaxRound())
             Debug.Log("게임 끝");
+
+        PinReposition();
+        
+    }
+
+    public void PinReposition()
+    {
         for (int i = 0; i < transform.childCount; i++)
         {
             pinRb[i].velocity = Vector3.zero;
@@ -36,7 +43,6 @@ public class PinsManager : MonoBehaviour
             GameManager.Instance.SetTrial(0);
         }
     }
-
 
 
     public void Spare()

@@ -123,6 +123,7 @@ public class BowlingBall : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         transform.position = startPos.position;
         transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+        isRolling = false;
     }
 
 

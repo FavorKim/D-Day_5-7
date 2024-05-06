@@ -32,11 +32,15 @@ public class GameManager : MonoBehaviour
     // Classes
     private PinsManager pM;
     private BowlingBall ball;
+    private BowlingEquipment bE;
+    
 
     // Fields
     [SerializeField] private int trial = 0;
     [SerializeField] private int floor = 0;
     [SerializeField] private int MaxRound;
+
+
     #region Get_Set_Method
     public void SetTrial(int trial)
     {
@@ -72,6 +76,7 @@ public class GameManager : MonoBehaviour
 
         pM = FindObjectOfType<PinsManager>();
         ball = FindObjectOfType<BowlingBall>();
+        bE = FindObjectOfType<BowlingEquipment>();
 
         totalScore = 0;
     }
@@ -94,6 +99,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("총합 점수 : " + totalScore);
         Score = 0;
         floor++;
-        pM.Reset();
+        bE.GetAnimator().SetTrigger("BallDown");
+        // 애니메이션 작동.
     }
 }
+
+/*
+ 클리너 작동 및 세터 작동
+세터 작동 완료하면 재배치 및 세터 업
+
+ */

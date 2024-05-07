@@ -9,6 +9,9 @@ public class BowlingBall : MonoBehaviour
 {
 
     private Rigidbody rb;
+    [SerializeField] Transform handPos;
+
+
 
     // 캐릭터 애니메이션
     [SerializeField] private Animator anim;
@@ -40,6 +43,7 @@ public class BowlingBall : MonoBehaviour
 
     private Vector2 moveDir;
     private Vector2 dir;
+    private Vector2 spinDir;
 
     private void Start()
     {
@@ -54,9 +58,21 @@ public class BowlingBall : MonoBehaviour
 
     private void Update()
     {
+        TraceHand();
         Bowl();
         Move();
     }
+
+    bool isTrace = true;
+
+    void TraceHand()
+    {
+        if (isTrace)
+            transform.position = handPos.position;
+        else
+            transform.position = transform.position;
+    }
+
 
     public void OnMove(InputValue val)
     {
@@ -71,12 +87,12 @@ public class BowlingBall : MonoBehaviour
         else if (moveDir.x < 0)
         {
             anim.SetBool("StrafeLeft", true);
-            anim.gameObject.transform.Translate(moveDir* moveSpeed * Time.deltaTime);
+            //anim.gameObject.transform.Translate(moveDir * moveSpeed * Time.deltaTime);
         }
         else if (moveDir.x > 0)
         {
             anim.SetBool("StrafeRight", true);
-            anim.gameObject.transform.Translate(moveDir * moveSpeed * Time.deltaTime);
+            //anim.gameObject.transform.Translate(moveDir * moveSpeed * Time.deltaTime);
         }
     }
 
@@ -87,7 +103,9 @@ public class BowlingBall : MonoBehaviour
             return;
         if (transform.position.x < 4.5 && moveDir == Vector2.right)
             return;
-        transform.Translate(moveDir * moveSpeed * Time.deltaTime);
+        anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+
+        anim.gameObject.transform.Translate(moveDir * moveSpeed * Time.deltaTime);
     }
 
     void Bowl()
@@ -135,11 +153,8 @@ public class BowlingBall : MonoBehaviour
             }
             else
             {
-                isRolling = true;
-                // 갱신된 최대 파워 만큼 공의 앞 방향으로 볼링공 투척
-                rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
-                // 마우스 뗐을 때의 위 아래 입력에 따라 볼링공을 회전시킴
-                rb.angularVelocity = new Vector3(-dir.y * spinPower, rb.angularVelocity.y, dir.x * spinPower) * Time.deltaTime;
+                spinDir = dir;
+                anim.SetTrigger("ThrowBall");
             }
 
 
@@ -147,13 +162,26 @@ public class BowlingBall : MonoBehaviour
 
             //Debug.Log("Final : " + finalPow);
             //Debug.Log("Max : " + maxBowlPow);
-            finalPow = 0.0f;
-            maxBowlPow = 1.0f;
-            backswingPersistence = 0;
+
 
             // 캐릭터 애니메이션
-            anim.SetTrigger("ThrowBall");
         }
+    }
+
+    public void ThrowBall()
+    {
+        isRolling = true;
+        isTrace = false;
+        anim.SetBool("isThrow", true);
+
+
+        // 갱신된 최대 파워 만큼 공의 앞 방향으로 볼링공 투척
+        rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
+        // 마우스 뗐을 때의 위 아래 입력에 따라 볼링공을 회전시킴
+        rb.angularVelocity = new Vector3(-spinDir.y * spinPower, rb.angularVelocity.y, spinDir.x * spinPower) * Time.deltaTime;
+        finalPow = 0.0f;
+        maxBowlPow = 1.0f;
+        backswingPersistence = 0;
     }
 
 
@@ -181,6 +209,9 @@ public class BowlingBall : MonoBehaviour
         transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         isRolling = false;
         isMoving = true;
+        isTrace = true;
+        anim.SetBool("isThrow", false);
+        anim.gameObject.transform.position = startPos.position;
     }
 
 

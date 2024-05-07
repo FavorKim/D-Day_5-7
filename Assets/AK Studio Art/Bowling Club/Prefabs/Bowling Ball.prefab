@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2440353685754912435
 MeshFilter:
@@ -95,17 +95,9 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105973264634596268}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 2
   m_Radius: 0.1187696
   m_Center: {x: 0.0000006072223, y: 0.00052902475, z: 0.0000006109476}
 --- !u!54 &-561781321198709864
@@ -115,21 +107,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105973264634596268}
-  serializedVersion: 4
-  m_Mass: 50
+  serializedVersion: 2
+  m_Mass: 200
   m_Drag: 0.01
   m_AngularDrag: 0.001
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -147,15 +128,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27059a99a3908624ea1178ea493089af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handPos: {fileID: 0}
+  anim: {fileID: 0}
   pMLeft: {fileID: 0}
   centerOfLane: {fileID: 0}
   startPos: {fileID: 0}
-  bowlPower: 500
+  moveSpeed: 1
+  bowlPower: 2000
   powerMinusPerSec: 15
   powerPlusforBackSwing: 150
   spinPower: 10
   backswingPersistence: 0
   timeToStartDecrease: 1
+  isRolling: 0
+  isMoving: 1
 --- !u!114 &9194530283541203651
 MonoBehaviour:
   m_ObjectHideFlags: 0

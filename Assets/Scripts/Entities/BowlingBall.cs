@@ -1,29 +1,35 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
-
+// ë³¼ë§ ê³µì„ ë‹¤ë£¨ëŠ” í´ë˜ìŠ¤
 public class BowlingBall : MonoBehaviour
 {
-    Rigidbody rb;
 
-    [SerializeField, Tooltip("RÅ°¸¦ ´­·¶À» ¶§ º¼¸µ°øÀ» µÇµ¹¸± À§Ä¡(Transform)")] Transform startPos;
+    private Rigidbody rb;
+    
+    [SerializeField] private PinsManager pMLeft;
+    [SerializeField] private Transform centerOfLane; // ë ˆì¸ì˜ ì¤‘ê°„ ì§€ì 
+    [SerializeField, Tooltip("Rí‚¤ë¥¼ ëˆŒë €ì„ ë•Œ ë³¼ë§ê³µì„ ë˜ëŒë¦´ ìœ„ì¹˜(Transform)")] private Transform startPos; // ì‹œì‘ ì§€ì 
 
-    float pow;
-    float maxBowlPow = 1.0f;
-    float finalPow;
-    [SerializeField, Tooltip("º¼¸µ°ø ¼Óµµ °è¼ö")] float bowlPower;
-    [SerializeField, Tooltip("¹é½ºÀ® Áö¼Ó½Ã ÆÄ¿ö °¨¼Ò·®")] float powerMinusPerSec;
-    [SerializeField, Tooltip("¹é½ºÀ®½Ã ÃÖ´ë ÆÄ¿ö Áõ°¡·®")] float powerPlusforBackSwing;
+    // ë³¼ë§ ê³µì— ê°€í•˜ëŠ” í˜ ê³„ìˆ˜
+    private float pow;
+    private float maxBowlPow = 1.0f;
+    private float finalPow;
 
+    [SerializeField, Tooltip("ë³¼ë§ê³µ ì†ë„ ê³„ìˆ˜")] private float bowlPower;
+    [SerializeField, Tooltip("ë°±ìŠ¤ìœ™ ì§€ì†ì‹œ íŒŒì›Œ ê°ì†ŒëŸ‰")] private float powerMinusPerSec;
+    [SerializeField, Tooltip("ë°±ìŠ¤ìœ™ì‹œ ìµœëŒ€ íŒŒì›Œ ì¦ê°€ëŸ‰")] private float powerPlusforBackSwing;
+    [SerializeField, Tooltip("ë³¼ë§ê³µ ìŠ¤í•€ ê³„ìˆ˜")] private float spinPower;
 
+    [SerializeField, Tooltip("ë°±ìŠ¤ìœ™ ì§€ì† ì‹œê°„")] private float backswingPersistence = 0;
+    [SerializeField, Tooltip("ë°±ìŠ¤ìœ™ ì§€ì† ì‹œ ê°ì†ì„ ì‹œì‘í•  ì‹œê°„")] private float timeToStartDecrease;
 
-    [SerializeField, Tooltip("¹é½ºÀ® Áö¼Ó ½Ã°£")] float backswingPersistence = 0;
-    [SerializeField, Tooltip("¹é½ºÀ® Áö¼Ó ½Ã °¨¼ÓÀ» ½ÃÀÛÇÒ ½Ã°£")] float timeToStartDecrease;
+    private bool corStarted = false;
 
+    private Vector2 dir;
 
     private void Start()
     {
@@ -32,64 +38,74 @@ public class BowlingBall : MonoBehaviour
 
     public void OnSwing(InputValue val)
     {
-        // ¹é½ºÀ® ¹æÇâ»êÃâ °í·Áx 
-        // ´øÁú ¶§¸¸ ¹æÇâ »êÃâÇØ¼­ ¹æÇâÀÌ ´Ş¶óÁú ¼ö ÀÖµµ·Ï.
-        pow = val.Get<Vector2>().x;
+        // ë°±ìŠ¤ìœ™ ë°©í–¥ ì‚°ì¶œ ê³ ë ¤ X 
+        // ë˜ì§ˆ ë•Œë§Œ ë°©í–¥ ì‚°ì¶œí•´ì„œ ë°©í–¥ì´ ë‹¬ë¼ì§ˆ ìˆ˜ ìˆë„ë¡.
+        dir = val.Get<Vector2>();
+        pow = dir.y;
     }
 
     private void Update()
     {
         Bowl();
-
     }
-
-
 
     void Bowl()
     {
-        /* ¹®Á¦Á¡
-        // 1. ¸¶¿ì½º¸¦ ´©¸£°íÀÖ´Â µ¿¾È °è¼Ó °ªÀÌ ¿À¸£±â ¶§¹®¿¡ º¼¸µ°øÀÇ ÆÄ¿ö¿Í ¸¶¿ì½º°¡ ¿òÁ÷ÀÌ´Â ¼Óµµ°¡ °ü°è°¡ ¾ø´Ù
-        // ÇØ°á¹æ¾È
-        // 1. ÀÔ·Â ½Ã°£¿¡ Á¦ÇÑÀ» µÎ¾î¼­ ¾ğÁ¦±îÁö°í ÈûÀ» ´Ã¸± ¼ö ¾øµµ·Ï ÇÑ´Ù.
-        // 2. ¸¶¿ì½º ÀÔ·ÂÀÇ ÃÖ´ëÄ¡¸¸ »êÃâÇÏ¿© Àû¿ëÇÑ´Ù.
-        // 2-1. ¹é½ºÀ®Àº ¼Óµµ°¡ »ó°ü ¾øÀ¸´Ï ÇöÀç ÆÄ¿ö¸¦ Áõ°¡½ÃÅ³ ¶§¸¸ ÃÖ´ëÄ¡¸¦ »êÃâÇÏ¿© Àû¿ëÇÏÀÚ.
-        // 2-2. ¹é½ºÀ®À» ³Ê¹« ºü¸£°Ô ÇØµµ ¾ÈµÇ´Ï±î ÀÏÁ¤ ¼öÄ¡¸¦ ³Ñ¾î°¡¸é maxPower°¡ ¿À¸£Áö ¾Êµµ·Ï ÇÏ¿©
-        //   ÇÃ·¹ÀÌ¾î°¡ ¹é½ºÀ®ÀÇ ¼Óµµ¸¦ ³Ê¹« ºü¸£°Ô ÇÏÁö ¾Êµµ·Ï ÇÏ´Â Çö½ÇÀûÀÎ ¿ä¼Ò¸¦ Ãß°¡ÇÏÀÚ
-        // fin. Á¦ÇÑ½Ã°£ÀÌ³ª Á¤±³ÇÑ ÇÃ·¹ÀÌ¸¦ ¿ä±¸ÇÏ´Â µîÀÇ ¿ä¼Ò¸¦ ÅëÇØ ÇÃ·¹ÀÌ¾î¸¦ ¹­¾îµÎÁö ¸»ÀÚ.
-        // Çö½Ç¼º°ú ÇÃ·¹ÀÌ¾îÀÇ ÀÚÀ¯·Î¿î ÇÃ·¹ÀÌ °æÇèÀ» À§ÇØ ¹é½ºÀ®À» ³Ê¹« ¿À·¡ Áö¼ÓÇÏ¸é ÈûÀÌ ºüÁöµí
-        // Á¡Á¡ ÃÖ´ë ÆÄ¿ö°¡ ³·¾ÆÁöµµ·Ï ÇÏ¿© °£Á¢ÀûÀ¸·Î °£¼·ÇÏÀÚ.
+        /* ë¬¸ì œì 
+        // 1. ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ê³ ìˆëŠ” ë™ì•ˆ ê³„ì† ê°’ì´ ì˜¤ë¥´ê¸° ë•Œë¬¸ì— ë³¼ë§ê³µì˜ íŒŒì›Œì™€ ë§ˆìš°ìŠ¤ê°€ ì›€ì§ì´ëŠ” ì†ë„ê°€ ê´€ê³„ê°€ ì—†ë‹¤
+        // í•´ê²°ë°©ì•ˆ
+        // 1. ì…ë ¥ ì‹œê°„ì— ì œí•œì„ ë‘ì–´ì„œ ì–¸ì œê¹Œì§€ê³  í˜ì„ ëŠ˜ë¦´ ìˆ˜ ì—†ë„ë¡ í•œë‹¤.
+        // 2. ë§ˆìš°ìŠ¤ ì…ë ¥ì˜ ìµœëŒ€ì¹˜ë§Œ ì‚°ì¶œí•˜ì—¬ ì ìš©í•œë‹¤.
+        // 2-1. ë°±ìŠ¤ìœ™ì€ ì†ë„ê°€ ìƒê´€ ì—†ìœ¼ë‹ˆ í˜„ì¬ íŒŒì›Œë¥¼ ì¦ê°€ì‹œí‚¬ ë•Œë§Œ ìµœëŒ€ì¹˜ë¥¼ ì‚°ì¶œí•˜ì—¬ ì ìš©í•˜ì.
+        // 2-2. ë°±ìŠ¤ìœ™ì„ ë„ˆë¬´ ë¹ ë¥´ê²Œ í•´ë„ ì•ˆë˜ë‹ˆê¹Œ ì¼ì • ìˆ˜ì¹˜ë¥¼ ë„˜ì–´ê°€ë©´ maxPowerê°€ ì˜¤ë¥´ì§€ ì•Šë„ë¡ í•˜ì—¬
+        //   í”Œë ˆì´ì–´ê°€ ë°±ìŠ¤ìœ™ì˜ ì†ë„ë¥¼ ë„ˆë¬´ ë¹ ë¥´ê²Œ í•˜ì§€ ì•Šë„ë¡ í•˜ëŠ” í˜„ì‹¤ì ì¸ ìš”ì†Œë¥¼ ì¶”ê°€í•˜ì
+        // fin. ì œí•œì‹œê°„ì´ë‚˜ ì •êµí•œ í”Œë ˆì´ë¥¼ ìš”êµ¬í•˜ëŠ” ë“±ì˜ ìš”ì†Œë¥¼ í†µí•´ í”Œë ˆì´ì–´ë¥¼ ë¬¶ì–´ë‘ì§€ ë§ì.
+        // í˜„ì‹¤ì„±ê³¼ í”Œë ˆì´ì–´ì˜ ììœ ë¡œìš´ í”Œë ˆì´ ê²½í—˜ì„ ìœ„í•´ ë°±ìŠ¤ìœ™ì„ ë„ˆë¬´ ì˜¤ë˜ ì§€ì†í•˜ë©´ í˜ì´ ë¹ ì§€ë“¯
+        // ì ì  ìµœëŒ€ íŒŒì›Œê°€ ë‚®ì•„ì§€ë„ë¡ í•˜ì—¬ ê°„ì ‘ì ìœ¼ë¡œ ê°„ì„­í•˜ì.
         */
 
-        if (Input.GetMouseButton(0))       // ¸¶¿ì½º¸¦ ´©¸£°í ÀÖÀ» ¶§
+        /*
+         * â€» ìˆ˜ì • ì‚¬í•­
+         * 
+         * 1. ê³µì„ êµ´ë¦´ ìˆ˜ ìˆëŠ” ìƒí™©ì„ ì œí•œí•  ê²ƒ.
+         *  - ì˜ˆë¥¼ ë“¤ë©´, ê³µì´ êµ´ëŸ¬ê°€ëŠ” ë„ì¤‘ì— ê³µì„ ì¶”ê°€ë¡œ êµ´ë¦´ ìˆ˜ ì—†ì–´ì•¼ í•˜ë©°, ì„¤ì • UIì„ ì—´ì—ˆì„ ë•Œ ê³µì„ êµ´ë¦´ ìˆ˜ ì—†ì–´ì•¼ í•œë‹¤.
+         *  
+         * 2. 
+         */
+
+        if (Input.GetMouseButton(0))       // ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ê³  ìˆì„ ë•Œ
         {
-            if (backswingPersistence > timeToStartDecrease)
-                maxBowlPow -= powerMinusPerSec * Time.deltaTime;
-            else if (pow > 0)
+            if (backswingPersistence > timeToStartDecrease)         // ë°±ìŠ¤ìœ™ì„ ì˜¤ë˜ì§€ì†í–ˆì„ ê²½ìš°
+                maxBowlPow -= powerMinusPerSec * Time.deltaTime;    // ìµœëŒ€ íŒŒì›Œ ê°ì†Œ
+            else if (pow < 0)
             {
-                // ¸¶¿ì½ºÀÇ µ¨Å¸°ªÀÌ À½¼ö(¿À¸¥ÂÊ)ÀÏ ¶§, ÆÄ¿ö ÃÖ´ë°ª Áõ°¡
-                maxBowlPow += pow * Time.deltaTime * powerPlusforBackSwing;
+                // ë§ˆìš°ìŠ¤ì˜ ë¸íƒ€ê°’ì´ ìŒìˆ˜(ì˜¤ë¥¸ìª½)ì¼ ë•Œ, íŒŒì›Œ ìµœëŒ€ê°’ ì¦ê°€
+                maxBowlPow += Time.deltaTime * powerPlusforBackSwing;
                 backswingPersistence += Time.deltaTime;
             }
 
-            if (pow < 0)
-                SetFinalMax(-pow);         // ¸¶¿ì½ºÀÇ µ¨Å¸°ªÀÌ ¾ç¼ö(¿ŞÂÊ)ÀÏ ¶§, delta °ªÀ» ±¸ÇÏ¿© ÃÖ´ëÄ¡¸¦ °»½Å
+            if (pow > 0)
+                SetFinalMax(pow);         // ë§ˆìš°ìŠ¤ì˜ ë¸íƒ€ê°’ì´ ì–‘ìˆ˜(ì™¼ìª½)ì¼ ë•Œ, delta ê°’ì„ êµ¬í•˜ì—¬ ìµœëŒ€ì¹˜ë¥¼ ê°±ì‹ 
 
 
-            if (finalPow > maxBowlPow)     // ÆÄ¿ö°¡ ÃÖ´ëÄ¡¸¦ ³Ñ°ÔµÉ ½Ã, ÇöÀç ÆÄ¿ö ÃÖ´ë°ªÀ¸·Î Á¶Á¤
-                finalPow = maxBowlPow; 
+            if (finalPow > maxBowlPow)     // íŒŒì›Œê°€ ìµœëŒ€ì¹˜ë¥¼ ë„˜ê²Œë  ì‹œ, í˜„ì¬ íŒŒì›Œ ìµœëŒ€ê°’ìœ¼ë¡œ ì¡°ì •
+                finalPow = maxBowlPow;
         }
 
-        if (Input.GetMouseButtonUp(0))     // ¸¶¿ì½º¸¦ ¶¿ ¶§ (½ºÀ®À» ³¡³»°í ÅõÃ´ÇÒ ¶§)
+        if (Input.GetMouseButtonUp(0))     // ë§ˆìš°ìŠ¤ë¥¼ ë—„ ë•Œ (ìŠ¤ìœ™ì„ ëë‚´ê³  íˆ¬ì²™í•  ë•Œ)
         {
+            //Vector3 bowlDir = new Vector3(-dir.y, 0.0f, -dir.x).normalized;
 
-            // °»½ÅµÈ ÃÖ´ë ÆÄ¿ö ¸¸Å­ °øÀÇ ¾Õ ¹æÇâÀ¸·Î º¼¸µ°ø ÅõÃ´
+            // ê°±ì‹ ëœ ìµœëŒ€ íŒŒì›Œ ë§Œí¼ ê³µì˜ ì• ë°©í–¥ìœ¼ë¡œ ë³¼ë§ê³µ íˆ¬ì²™
             rb.AddForce(transform.forward * finalPow * Time.deltaTime * bowlPower, ForceMode.Impulse);
 
+            // ë§ˆìš°ìŠ¤ ë—ì„ ë•Œì˜ ìœ„ ì•„ë˜ ì…ë ¥ì— ë”°ë¼ ë³¼ë§ê³µì„ íšŒì „ì‹œí‚´
+            rb.angularVelocity = new Vector3(-dir.y * spinPower, rb.angularVelocity.y, dir.x * spinPower) * Time.deltaTime;
 
-            // ÅõÃ´ ¿Ï·á½Ã ÃÖ´ë ÆÄ¿ö, ÇöÀç ÆÄ¿ö ÃÊ±âÈ­
+            // íˆ¬ì²™ ì™„ë£Œì‹œ ìµœëŒ€ íŒŒì›Œ, í˜„ì¬ íŒŒì›Œ ì´ˆê¸°í™”
 
-            Debug.Log("Final : " + finalPow);
-            Debug.Log("Max : " + maxBowlPow);
+            //Debug.Log("Final : " + finalPow);
+            //Debug.Log("Max : " + maxBowlPow);
             finalPow = 0.1f;
             maxBowlPow = 1.0f;
             backswingPersistence = 0;
@@ -110,11 +126,37 @@ public class BowlingBall : MonoBehaviour
 
     public void OnReset(InputValue val)
     {
+        ResetBall();
+        pMLeft.Reset();
+    }
+    public void ResetBall()
+    {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         transform.position = startPos.position;
         transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("EndLine") && !corStarted)
+        {
+            corStarted = true;
+            StartCoroutine(CorEndFloor());
+        }
+    }
+
+    IEnumerator CorEndFloor()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5.0f);
+            GameManager.Instance.FloorSet();
+            corStarted = false;
+            StopCoroutine(CorEndFloor());
+            break;
+        }
+    }
 
 }

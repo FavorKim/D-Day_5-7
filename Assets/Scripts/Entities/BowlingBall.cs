@@ -99,9 +99,9 @@ public class BowlingBall : MonoBehaviour
     void Move()
     {
         if (!isMoving) return;
-        if (transform.position.x > 5.8 && moveDir == Vector2.left)
+        if (transform.position.x > 5.8f && moveDir == Vector2.left)
             return;
-        if (transform.position.x < 4.5 && moveDir == Vector2.right)
+        if (transform.position.x < 4.8f && moveDir == Vector2.right)
             return;
         anim.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
 

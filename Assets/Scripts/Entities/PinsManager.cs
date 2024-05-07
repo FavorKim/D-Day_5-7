@@ -9,7 +9,7 @@ public class PinsManager : MonoBehaviour
      */
 
     List<Rigidbody> pinRb = new List<Rigidbody>();
-    [SerializeField]List<Pin> pins = new List<Pin>();
+    List<Pin> pins = new List<Pin>();
     List<Vector3> pinPos = new List<Vector3>();
     [SerializeField] Transform basketPos;
 
@@ -27,22 +27,16 @@ public class PinsManager : MonoBehaviour
     {
         if (GameManager.Instance.GetFloor() >= GameManager.Instance.GetMaxRound())
             Debug.Log("게임 끝");
-
-        PinReposition();
-        
-    }
-
-    public void PinReposition()
-    {
         for (int i = 0; i < transform.childCount; i++)
         {
             pinRb[i].velocity = Vector3.zero;
             pinRb[i].angularVelocity = Vector3.zero;
             pins[i].transform.position = pinPos[i];
-            pins[i].transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
             GameManager.Instance.SetTrial(0);
         }
     }
+
 
 
     public void Spare()
@@ -54,14 +48,14 @@ public class PinsManager : MonoBehaviour
                 pinRb[i].velocity = Vector3.zero;
                 pinRb[i].angularVelocity = Vector3.zero;
                 pins[i].transform.position = pinPos[i];
-                pins[i].transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
             }
-            else if (pins[i].isFall)
+            else
             {
                 pinRb[i].velocity = Vector3.zero;
                 pinRb[i].angularVelocity = Vector3.zero;
                 pins[i].transform.position = basketPos.position;
-                pins[i].transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                pins[i].transform.rotation = Quaternion.Euler(-90.0f, 0.0f, 0.0f);
 
             }
         }
@@ -88,10 +82,7 @@ public class PinsManager : MonoBehaviour
         for (int i = 0; i < pins.Count; i++)
         {
             if (pins[i].isFall)
-            {
                 GameManager.Instance.Score++;
-            }
-
         }
         return GameManager.Instance.Score;
     }

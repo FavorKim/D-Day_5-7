@@ -5,18 +5,11 @@ public class BowlingEquipment : MonoBehaviour
 {
     // 애니메이터(Animator) 컴포넌트
     private Animator animator;
-    [SerializeField] private PinsManager pM;
 
     // ※ 코드를 재구성하면서 바꿀 필요가 있을 수 있습니다.
-    //[SerializeField] private GameObject[] prefabs; // 새롭게 배치할 볼링 핀 세트(10개) 프리팹
-    //private Vector3 pos; // 프리팹의 위치 정보
+    [SerializeField] private GameObject[] prefabs; // 새롭게 배치할 볼링 핀 세트(10개) 프리팹
+    private Vector3 pos; // 프리팹의 위치 정보
 
-    public Animator GetAnimator() { return animator; }
-    
-    public void OnResetPins()
-    {
-        pM.Reset();
-    }
 
     private void Update() 
     {
@@ -29,7 +22,7 @@ public class BowlingEquipment : MonoBehaviour
          * 2. 핀 클리너가 동작하여, 바닥에 쓰러져 있는 핀을 쓸어담는다.
          * 
          * 3. 만약, 핀 컬렉터가 들어올린 핀이 남아 있고, 아직 이번 턴이 끝나지 않았다면,
-         * 3-1. 들어올린 핀을 그대로 바닥에 내려놓는다.A
+         * 3-1. 들어올린 핀을 그대로 바닥에 내려놓는다.
          * 
          * 3. 만약, 핀 컬렉터가 들어올린 핀이 없거나(스페어/스트라이크), 이번 턴이 종료되었다면,
          * 3-2. 새롭게 10개의 핀을 생성하여 바닥에 내려놓는다.
@@ -57,20 +50,20 @@ public class BowlingEquipment : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>(); // 애니메이터
-        //pos = prefabs[0].transform.position;  // 시작할 떄 서있는 볼링공들의 위치를 받음
+        pos = prefabs[0].transform.position;  // 시작할 떄 서있는 볼링공들의 위치를 받음
     }
 
     public void CollectorDown() // 핀 컬렉터 다운
     {
         animator.SetBool("BallEmpty",true); // 공이 비었으면 컬렉터 다운 시켜서 세팅
-        //prefabs[0].SetActive(false); // 청소된 볼 비활성회
+        prefabs[0].SetActive(false); // 청소된 볼 비활성회
     }
 
     public void CollectorUp()
     {
-        //Instantiate(prefabs[2], pos, Quaternion.identity); // 볼리공 복제 
+        Instantiate(prefabs[2], pos, Quaternion.identity); // 볼리공 복제 
         animator.SetBool("BallEmpty", false); // 공이 있으니 컬렉터 위로 올림
-        //prefabs[1].GetComponent<Pins>().PinsDisActive();
+        prefabs[1].GetComponent<Pins>().PinsDisActive();
         
     }
 
@@ -82,7 +75,7 @@ public class BowlingEquipment : MonoBehaviour
     public void StopCleaner()
     {
         animator.SetBool("BallDown", false); // 볼 클리너 애니메이션 중지
-        //prefabs[1].GetComponent<Pins>().PinsActive(); // 클리너 안에 있는 볼들 활성화
+        prefabs[1].GetComponent<Pins>().PinsActive(); // 클리너 안에 있는 볼들 활성화
        
     }
 }

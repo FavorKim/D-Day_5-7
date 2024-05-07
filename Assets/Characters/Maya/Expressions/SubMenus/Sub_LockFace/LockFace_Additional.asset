@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -340790334, guid: 67cc4cb7839cd3741b63733d5adf0442, type: 3}
+  m_Name: LockFace_Additional
+  m_EditorClassIdentifier: 
+  controls:
+  - name: UnLock
+    icon: {fileID: 2800000, guid: e0d307af1ef152e4a918639d3a55e4e4, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 0
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Ah
+    icon: {fileID: 2800000, guid: 28cef20df8054c34390b2fa49b24b0a8, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 8
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Difficult
+    icon: {fileID: 2800000, guid: 28cef20df8054c34390b2fa49b24b0a8, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 9
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Disappoint
+    icon: {fileID: 2800000, guid: 28cef20df8054c34390b2fa49b24b0a8, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 10
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Panic
+    icon: {fileID: 2800000, guid: 28cef20df8054c34390b2fa49b24b0a8, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 11
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Quiet
+    icon: {fileID: 2800000, guid: 28cef20df8054c34390b2fa49b24b0a8, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 12
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: What
+    icon: {fileID: 2800000, guid: 28cef20df8054c34390b2fa49b24b0a8, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 13
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Angry
+    icon: {fileID: 2800000, guid: 28cef20df8054c34390b2fa49b24b0a8, type: 3}
+    type: 102
+    parameter:
+      name: Change_LockFaceReaction
+    value: 14
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []

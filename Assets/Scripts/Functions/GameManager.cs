@@ -1,34 +1,8 @@
 using UnityEngine;
 
 // 게임 매니저 클래스
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    // 싱글톤 구현
-    protected static GameManager instance;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance != null)
-            {
-                GameManager obj = FindAnyObjectByType<GameManager>();
-                if (obj != null)
-                {
-                    instance = obj;
-                }
-                else
-                {
-                    GameObject obj2 = new GameObject("GameManager");
-                    obj2.AddComponent<GameManager>();
-                    instance = obj2.GetComponent<GameManager>();
-                }
-
-            }
-            return instance;
-        }
-    }
-
     // Classes
     private PinsManager pM;
     private BowlingBall ball;
@@ -69,11 +43,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-
         pM = FindObjectOfType<PinsManager>();
         ball = FindObjectOfType<BowlingBall>();
         bE = FindObjectOfType<BowlingEquipment>();

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Maya : MonoBehaviour
+public class Character : MonoBehaviour
 {
     [SerializeField] BowlingBall ball;
 
@@ -10,5 +8,4 @@ public class Maya : MonoBehaviour
     {
         ball.ThrowBall();
     }
-
 }

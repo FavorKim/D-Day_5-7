@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     // Classes
     private PinsManager pM;
     private BowlingBall ball;
+    private ScoreUI scoreUI;
+
 
     // Fields
     [SerializeField] private int trial = 0;
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
 
         pM = FindObjectOfType<PinsManager>();
         ball = FindObjectOfType<BowlingBall>();
-
+        scoreUI = FindObjectOfType<ScoreUI>();
         totalScore = 0;
     }
 
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         trial++;
         pM.Spare();
+        scoreUI.GetAllScore(Score,totalScore);
         ball.ResetBall();
 
         if (trial > 1)
